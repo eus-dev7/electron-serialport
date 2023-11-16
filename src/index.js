@@ -1,10 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
-const express = require("express");
 const { SerialPort } = require("serialport");
 const { ReadlineParser } = require("@serialport/parser-readline");
 const path = require("path");
-const server = express();
-const PORT = 3000;
 
 // Configuración del puerto serie
 const port = new SerialPort({ path: "COM9", baudRate: 19200 });
@@ -39,15 +36,6 @@ function createWindow() {
     });
   }, 20000);
 }
-
-// Configuración del servidor Express
-server.get("/", (req, res) => {
-  res.send("¡Hola desde Express y Electron!");
-});
-
-server.listen(PORT, () => {
-  console.log(`Servidor Express escuchando en http://localhost:${PORT}`);
-});
 
 app.whenReady().then(createWindow);
 
