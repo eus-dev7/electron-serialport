@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi App Electron</title>
+    <script>
+      const { ipcRenderer } = require('electron');
+
+      function formatTime(date) {
+        return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+      }
+
+      ipcRenderer.on('serialData', (event, data) => {
+        const now = new Date();
+        var li = document.createElement("li");
+        li.textContent = formatTime(now) + " - " + data;
+        document.getElementById('dataList').appendChild(li);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>¡Bienvenido a mi app Electron!</h1>
+    <ul id="dataList"></ul>
+  </body>
+</html>
